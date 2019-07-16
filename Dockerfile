@@ -1,10 +1,11 @@
-FROM alpine:3.4
+FROM debian:stable-slim
 MAINTAINER git@getpanda.me
 
 ENV HUGO_VERSION 0.55.6
-ENV HUGO_RESOURCE hugo_${HUGO_VERSION}_Linux-64bit
+ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
 
-ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_RESOURCE}.tar.gz /tmp/
-
-RUN  mkdir /tmp/${HUGO_RESOURCE} && tar -xvzf /tmp/${HUGO_RESOURCE}.tar.gz -C /tmp/${HUGO_RESOURCE}/ \
-	&& mv /tmp/${HUGO_RESOURCE}/hugo /usr/bin/hugo && rm -rf /tmp/hugo*
+# Download and install hugo
+RUN curl -sL -o /tmp/hugo.deb \
+    https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} && \
+    dpkg -i /tmp/hugo.deb && \
+    rm /tmp/hugo.deb
