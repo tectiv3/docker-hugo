@@ -1,6 +1,10 @@
 FROM debian:stable-slim
 MAINTAINER git@getpanda.me
 
+RUN apt-get -qq update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends libstdc++6 rsync openssh git ca-certificates curl \
+	&& rm -rf /var/lib/apt/lists/*
+
 ENV HUGO_VERSION 0.55.6
 ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
 
