@@ -1,7 +1,7 @@
 FROM alpine:3.4
 MAINTAINER git@getpanda.me
 
-ENV HUGO_VERSION 0.54
+ENV HUGO_VERSION 0.55.6
 ENV HUGO_RESOURCE hugo_${HUGO_VERSION}_Linux-64bit
 
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_RESOURCE}.tar.gz /tmp/
